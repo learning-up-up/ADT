@@ -19,7 +19,7 @@
 
 ## 接口与实现
 节点模板
-```
+```cpp
 template<class T>
 class Link
 {
@@ -29,7 +29,7 @@ private:
 }
 ```
 链表模板：
-```
+```cpp
 template <class T>
 class List
 {
