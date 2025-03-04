@@ -19,7 +19,7 @@
 
 ## 接口与实现
 节点模板
-'''
+```
 template<class T>
 class Link
 {
@@ -27,9 +27,9 @@ private:
     T data;
     T* next;//下一个节点的位置
 }
-
+```
 链表模板：
-'''
+```
 template <class T>
 class List
 {
@@ -41,5 +41,4 @@ public：
     Next()//curr移动到后继
     //构造方法，遍历方法……
 };
-'''
-
+```
