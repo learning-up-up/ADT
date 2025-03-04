@@ -18,14 +18,28 @@
 列表通过节点连接，理论上也存在秩，但是循秩访问的效率相当低，应使用循位置访问
 
 ## 接口与实现
+节点模板
+'''
+template<class T>
+class Link
+{
+private:
+    T data;
+    T* next;//下一个节点的位置
+}
+
+链表模板：
 '''
 template <class T>
 class List
 {
 ptivate:
-    
-    Pred()\\找到前驱
-    Next()\\找到后继
+    Link<T>* header;//头节点
+    Link<T>* tralier;//尾节点
+public：
+    Pred()//curr移动到前驱
+    Next()//curr移动到后继
+    //构造方法，遍历方法……
 };
 '''
 
