@@ -20,6 +20,7 @@
 
 ## 接口与实现
 ### 节点模板
+双向链表的节点模板，单向链表中节点类没有pree这个前元素指针
 ```cpp
 template<class T>
 class Link
@@ -38,12 +39,13 @@ template <class T>
 class List
 {
 ptivate:
+    int _size;
     Link<T>* header;//头节点
     Link<T>* tralier;//尾节点
 public：
     init();
-    Pred()//curr移动到前驱
-    Next()//curr移动到后继
+    Pred();//curr移动到前驱
+    Next();//curr移动到后继
     //构造方法，遍历方法……
 };
 ```
@@ -90,6 +92,7 @@ void Listnode::Copy(Listnode* p, int n)
 ```
 
 ### 删除
+双向链表删除当前节点的元素
 ```cpp
 template <class T>
 void List::remove(Listnode* p)
@@ -101,6 +104,7 @@ void List::remove(Listnode* p)
 }
 ```
 
+对于单向链表，给出指针p，只能删除p之后的这个元素
 #### 析构
 先将所有内部节点删除，在释放头节点和尾节点
 
@@ -127,4 +131,25 @@ int List<T>::deduplicate()
     }
     return oldsize -size;
 }
-### 
+```
+
+## 有序列表
+### 有序列表的唯一化
+
+对于有序列表，整个列表按照从小到大的顺序被分为若干组。为了实现唯一化，我们可以从首节点开始，找出每组中的首节点，将其余重复节点删除。这样实现的有序列表去重可以更加高效。
+```cpp
+template <class T>
+void List<T>::uniquify()
+{
+    if(_size < 2)
+        break;
+    
+    Listnode* p = first();
+    Listnode* q;
+    while(trailer !=(q = p->next))
+        if(p->data != q->data)
+        p = q;
+    else
+    remove(q);
+}
+```
