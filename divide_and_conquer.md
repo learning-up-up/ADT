@@ -15,15 +15,15 @@ Type DAndC(P)
 }
 ```
 ## 复杂度
-$$
-    T(n) = 
+```math
+T(n) = 
     \begin{cases}
         T(1) & n = 1\\
         aT(n/b) + f(n) & n > 1
     \end{cases}
-$$
+```
 解这个递归式可以得到
-$$
-    T(n) = n^{\log^a_b}[T(1) + u(n)]
-$$
-其中，$u(n) = \sum^k_{k = 1}h(b^k)$
+```math
+T(n) = n^{\log^a_b}[T(1) + u(n)]
+```
+其中，$`u(n) = \sum^k_{k = 1}h(b^k)`$
