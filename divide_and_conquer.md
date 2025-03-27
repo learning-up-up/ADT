@@ -27,3 +27,41 @@ T(n) =
 T(n) = n^{\log^a_b}[T(1) + u(n)]
 ```
 其中，$`u(n) = \sum^k_{k = 1}h(b^k)`$
+
+## 实际应用
+### 残缺棋盘
+
+### 二分搜索
+前提：升序排好的序列。查找元素x，返回下标，若不存在返回-1（按习惯下标从0开始）
+
+方法：先找最中间的元素$ q = n / 2 $，若等于x，直接返回下标；若不等于，再比较 $ *(a + q) > x $再递归查找 $ q + 1 < i < n $这一段。反之亦然。
+
+#### 时间复杂度
+
+n取值为$ [2^{k - 1}, 2^k) $时，最多做k此比较即可完成。时间复杂度为 $ O(\log n) $
+
+#### 实现
+```cpp
+//数组降序排列
+template <class T>
+int BinSearch(T *a, int n, T x)
+{
+    int low = 1, high = n + 1;
+    while (low < (high - 1))
+    {
+        int mid = (low + high) / 2;
+        if(x < a[mid])
+            high = mid;
+        else
+            low = mid;
+    }
+    if( x == a[low])
+        return low;
+    else 
+        return 0;
+
+}
+```
+减少了比较次数的优化版本
+
+### max and min
