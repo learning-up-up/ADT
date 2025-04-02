@@ -65,3 +65,109 @@ int BinSearch(T *a, int n, T x)
 减少了比较次数的优化版本
 
 ### max and min
+
+对于分治算法，其重要的步骤是划分问题并进行递归，对于该问题，经典的遍历比较与分治算法的比较复杂度为 $ O(n) $，但分治算法在递归过程中进行入栈和出栈的过程是一个效率较低的过程，导致分治算法并没有明显的性能提升，反而在递归层数较多时性能有明显下降。
+
+### 排序
+
+#### 归并排序
+
+基本思想：将一个序列分成两个序列，分别对两个序列进行排序之后，再对两个排序进行合并。合并的过程中，由于两个序列都是有序的，因此可以通过逐次由左到右比较两个序列的最小值，来实现合并。
+
+```cpp
+void Merge(int *a, int n)
+{
+    int *b = new int[n];//在这里开辟新数组来进行合并
+
+    int i = 0, j = n / 2;
+
+    while((i < n / 2) && (j < n))
+    {
+        if(a[i] < a[j])
+            b[i + j++] = a[i++];
+        else
+            b[i + j++] = a[j++];
+    }
+    
+    if(i >= n / 2)
+    {
+        while(j < n)
+            b[i + j++] = a[j++];
+    }
+    if(j >= n)
+    {
+        while(i < n / 2)
+            b[i + j++] = a[i++];
+    }
+    for(int k = 0; k < n; k++)
+        a[k] = b[k];
+    delete[] b;
+}
+void Sort(int *a, int n)
+{
+    // n = 1时，就不必再排序了
+    if(n > 1)
+    {
+        //划分
+        Sort(a, n / 2);
+        Sort(a + n / 2, n - n / 2);
+        //合并
+        Merge(a, n);
+    }
+}
+```
+
+##### 时间复杂度
+最坏的情况下，Merge操作需要进行$ n - 1 $次比较，考虑其时间复杂度
+```math
+T(n) = 
+    \begin{cases}
+        T(1) = a, n = 1\\
+        2T(n / 2) + n - 1 & n \geq 2
+    \end{cases}
+```
+解这个递归式,当$n = 2^k$时
+```math
+    \begin{equation*}
+        \begin{split}
+            T(n)& = T(2^k)\\
+            & = 2T(2^{k - 1}) + 2^k - 1\\
+            & =\dots\\
+            & =2^kT(1) + k(2^{k} - 1) + 1\\
+            & =an + (n-1)\log n + 1
+        \end{split}
+    \end{equation*}
+```
+因此时间复杂度为 $ O(n \log n) $
+
+#### 快速排序
+
+```cpp
+template <class T>
+void Sort(T* pa ,int n)
+{
+    if(n == 0 || n == 1)
+        return;
+    else
+    {
+        int l = -1, r = n;
+        int flag = *pa;
+        while(l < r)
+        {
+            do
+                l++;
+            while (*(pa + l) < flag);
+
+            do
+                r--;
+            while (*(pa + r) > flag);
+
+            if(l < r)
+                swap(*(pa + l), *(pa + r));
+        }
+            Sort(pa, r + 1);
+            Sort(pa + r + 1, n - r - 1);
+        
+    }
+}
+```
