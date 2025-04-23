@@ -1,3 +1,7 @@
+<script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
 # 相关术语
 ## 树的定义
 节点的集合，存在一个特殊的根节点，其余的节点可以被划分为n个不相交的集合，其中每个集合仍是一个树，称为根节点的子树。这是对树的递归定义
