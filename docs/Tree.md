@@ -43,3 +43,46 @@ struct Node
 };
 ```
 
+树结构实现
+```cpp
+class Tree
+{
+private:
+    Node* root;
+public:
+    Tree(){root = NULL;}
+    ~Tree();
+    void Insert(int x);
+};
+```
+### 遍历实现
+存在三种遍历方法：前序遍历，中序遍历，后序遍历
+
+代表了当前节点相对其左右子树的访问顺序，但注意左子树总是优先于右子树访问
+
+```cpp
+//这是前序遍历的实现
+void Tree::visit(*Node p = root)
+{
+    printf("%d\n",p);
+    if (!p->lchild)
+        visit(p->lchild);
+    if (!p->rchild)
+        visit(p->rchild);
+}
+
+//中序遍历
+void Tree::visit(*Node p = root)
+{
+    if(!p->lchild)
+        visit(p->lchild);
+    printf("%d\n",p);
+    if(!p->rchild)
+        visit(p->rchild);
+}
+```
+
+遍历的应用
+编译器运算处理
+对于一个计算表达式的二叉树结构，往往可以使用后续遍历来实现逆波兰式的生成，再进一步通过栈结构进行运算
+
